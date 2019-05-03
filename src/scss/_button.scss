@@ -1,0 +1,32 @@
+%button {
+	//文字のスタイル
+	text-decoration: none;
+	text-align: center;
+	font-size: 1.3rem;
+	line-height: 1.5;
+	
+	//ボタンの枠のスタイル
+	border-radius: 5px;
+	
+	//ボタンの配置のスタイル
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 5px;
+	cursor: pointer;
+	
+	//擬似要素
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.button--save {
+	@extend %button;
+	display: block;
+	width: 150px;
+	height: 50px;
+	margin: 20px 10px 30px auto;
+	font-size: 1.5rem;
+	color: #fff;
+	background-color: #b2f0ff;
+}
