@@ -14,10 +14,7 @@
 			return {
 				//変換前、変換後テキスト
 				markdownTextArray: [],
-				convertedHTMLTextArray: [],
-				//差分 変更分にのみ変換処理を適用するために利用
-				previousMdArray: [],
-				previousHTMLArray: [],				
+				convertedHTMLTextArray: [],			
 				codeBlockMode: false,
 				//行頭で宣言されたマークダウン記法用の記号
 				mdSymbol: "", 
@@ -53,19 +50,14 @@
 				//行単位で処理するために改行コードで分割
 				this.markdownTextArray = this.markdownText.split(/\r\n|\r|\n/);
 				this.convertedHTMLTextArray = [];
+				this.codeBlockMode = false;
+				
 				//「this」をvueインスタンスとするためアロー関数で処理
-				this.markdownTextArray.forEach((element, index) =>{
-					//前回描画分と差分をとり、変更が生じた部分についてのみ変換処理を適用
-					if (this.previousMdArray.length !== 0 && element === this.previousMdArray[index]) {
-						this.convertedHTMLTextArray.push(this.previousHTMLArray[index]);
-						return;
-					}
+				this.markdownTextArray.forEach((element) =>{
+					//差分で描画するとタグの並びに不整合が生じてしまうので、逐一全て再描画する
 					this.markdownConvertToHTML(element);
 				});
 				
-				//差分用の配列にディープコピー
-				this.previousMdArray = Array.from(this.markdownTextArray);
-				this.previousHTMLArray = Array.from(this.convertedHTMLTextArray);
 				//変換結果を渡し再描画
 				this.$emit("converted", this.convertedHTMLTextArray);
 			}
