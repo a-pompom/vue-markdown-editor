@@ -1,29 +1,19 @@
-# app_markdown
+# マークダウンエディタ
 
-## Project setup
-```
-npm install
-```
+## 概要
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+vue.jsでマークダウンエディタっぽいやつを作っています。
+現在は、以下の機能を実装しています。
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* タイトル、タグを反映
+* マークダウンテキストとして以下のものをマークアップへと変換
+	* 見出し
+	* リスト
+	* 引用
+	* 下線
+	* コードスニペット
+	* リンク
 
-### Run your tests
-```
-npm run test
-```
+* 出力ボタンクリックでHTMLファイルを生成(ハリボテ)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<img src="./public/capture.png">
