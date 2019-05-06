@@ -1,17 +1,23 @@
 <template>
 	<div class="markdownArea">
+		<!-- タイトル領域  -->
 		<div class="markdownArea__title">
+			<!-- タイトル  -->
 			<textarea id="markdownTitle" placeholder="title" class="markdownArea__title__text"
-				
+				v-model="markdownTitleTextArea"
 			></textarea>
-			<textarea id="markdownTag" placeholder="tag" class="markdownArea__title__tag"></textarea>
+			<!-- タグ  -->
+			<textarea id="markdownTag" placeholder="tag" class="markdownArea__title__tag"
+				v-model="markdownTitleTag"
+			></textarea>
 			
 		</div>
+		
+		<!-- 本文  -->
 		<div class="markdownArea__body">
-			<textarea id="markdownBody" class="markdownArea__body__text"
-				v-model="markdownBodyTextArea"
-				v-on:keydown.prevent.tab="test"
-				
+			<textarea id="markdownBody" class="markdownArea__body__text" ref="md_input"
+				v-on:keydown.prevent.tab="tabPressed"
+				v-on:keydown.enter="enterPressed"
 			></textarea>
 		</div>
 	</div>	
@@ -21,22 +27,47 @@
 <script>
 	export default {
 		props: {
-			markdownText: String	
+			markdownTitle: String,
+			markdownTag: String,
+			markdownText: String
 		},
+		
+		//逐一変化を反映させる要素はcomputedに記述
 		computed: {
-			markdownBodyTextArea: {
+			//タイトル
+			markdownTitleTextArea: {
 				get: function() {
-					return this.markdownText;
+					return this.markdownTitle;
 				},
 				set: function(value) {
-					this.$emit('bodyChanged', value);
+					this.$emit('titleChanged', value);
 				}
-			}	
+			},
+			
+			//タグ
+			markdownTitleTag: {
+				get: function() {
+					return this.markdownTag;
+				},
+				set: function(value) {
+					this.$emit('tagChanged', value);
+				}
+			}
 		},
+		
 		methods: {
-			test: function() {
-				console.log('tab run');
+			/**
+			 * タブキー押下時に発火する処理
+			 */
+			tabPressed: function() {
 				this.$emit('bodyTabPressed');
+			},
+			
+			/**
+			 * エンターキー押下時に発火する処理 textareaのvalue値をrefsで渡して変換
+			 */
+			enterPressed: function() {
+				this.$emit('bodyChanged', this.$refs.md_input.value);
 			}
 		}
 	};
@@ -59,6 +90,7 @@
 			border-radius: 10px;
 			padding: 10px;
 			margin-bottom: 5%;
+			padding-bottom: 20px;
 			
 			&__text {
 				display: block;
