@@ -7,7 +7,7 @@ import * as stringUtil from './stringUtil.js';
  * @returns {string} カット後のテキスト
  */
 export function cutSymbol(targetText, symbol) {
-	let cutIndex = stringUtil.firstIndexOf(targetText," ") +1
+	let cutIndex = (targetText.indexOf(' ') + 1);
 	return targetText.substring(cutIndex);
 }
 
