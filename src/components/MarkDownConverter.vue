@@ -70,7 +70,7 @@
 			 */
 			markdownConvertToHTML(targetText) {
 				//描画モードが変化した場合は閉じタグなどの終了処理を実行
-				this.mdSymbol = stringUtil.substrByFirstSpace(targetText);
+				this.mdSymbol = targetText.substring(0, targetText.indexOf(' '));
 				if(!stringUtil.isNullOrEmpty(this.renderMode.symbol) &&
 				   		!helper.hasSameSymbol(this.renderMode.symbol, this.mdSymbol)) {
 					targetText = stringUtil.insert(targetText, 0, helper.getCloseTag(this.renderMode.mode));
