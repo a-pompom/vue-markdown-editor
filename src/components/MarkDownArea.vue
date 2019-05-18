@@ -16,6 +16,7 @@
 		<!-- 本文  -->
 		<div class="markdownArea__body">
 			<textarea id="markdownBody" class="markdownArea__body__text" ref="md_input"
+			    v-model="markdownBodyText"
 				v-on:keydown.prevent.tab="tabPressed"
 				v-on:keydown.enter="enterPressed"
 			></textarea>
@@ -52,6 +53,14 @@
 				set: function(value) {
 					this.$emit('tagChanged', value);
 				}
+			},
+			
+			markdownBodyText: {
+				get() {
+					return this.markdownText;
+				},
+				set() {
+				}
 			}
 		},
 		
@@ -60,7 +69,7 @@
 			 * タブキー押下時に発火する処理
 			 */
 			tabPressed: function() {
-				this.$emit('bodyTabPressed');
+				this.$emit('bodyTabPressed', this.$refs.md_input.value);
 			},
 			
 			/**

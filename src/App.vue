@@ -134,9 +134,9 @@ export default {
 		/**
 		 * タブ押下時の処理をスペース4つ挿入で上書きする
 		 */
-		setTab: function() {
-			//TODO? 任意の位置に挿入できるようにしたい
-			this.markdownText += "    ";
+		setTab: function(value) {
+			//TODO? 任意の位置に挿入できるようにしたい			
+			this.markdownText = value + "    ";
 		},
 		
 		/**
