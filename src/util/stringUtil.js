@@ -65,22 +65,12 @@ export function insertHTMLTag(value, tag, hasCloseTag, attrClass, attr) {
 }
 
 /**
- * 文字列中で指定の値が最初に出現する位置を返す
- * @param   {String} value      - 検索対象文字列
- * @param   {String} searchTerm - 出現位置を検索する語句                              
- * @returns {Number} 該当なし→-1 該当あり→インデックス
- */
-export function	firstIndexOf(value, searchTerm) {
-		return value.indexOf(searchTerm);
-	}
-	
-/**
  * 文字列の先頭から最初のスペースまでの部分文字列を取得する
  * @param   {string} value 分割対象文字列
  * @returns {string} スペースを含まない→空文字 含む→部分文字列　
  */
 export function	substrByFirstSpace(value) {
-		return value.substring(0, this.firstIndexOf(value, ' '));
+		return value.substring(0, value.indexOf(' '));
 	}
 
 /**
